@@ -1,0 +1,116 @@
+/* Обнуление  */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------------------------------------------------------------------  */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  margin: 5px;
+  border: 2px solid black;
+  width: 100%;
+}
+
+.main {
+  margin: 5px;
+  border: 2px solid black;
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+.footer {
+  margin: 5px;
+  border: 2px solid black;
+  width: 100%;
+}
+
+._container {
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+.header__container {
+  text-align: center;
+}
+
+.main__container {
+  text-align: center;
+  display: flex;
+  align-items:flex-start;
+  justify-content: center;
+}
+
+.footer__container {
+  text-align: center;
+}
+
+.main__content {
+  margin: 5px;
+  border: 2px solid black;
+  flex: 7;
+}
+
+.main__sidebar {
+  margin: 5px;
+  border: 2px solid black;
+  flex: 2;
+  height: 100%;
+}
+
+.main__bill {
+  margin: 5px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+}
