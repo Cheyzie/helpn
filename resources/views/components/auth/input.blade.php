@@ -1,5 +1,6 @@
 <div class="auth__input">
     <input
+        autocomplete="{{ $attributes->get('autocomplete') ?? 'on'}}"
         value="{{old($name)}}"
         type="{{ $type }}"
         name={{ $name }}

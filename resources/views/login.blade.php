@@ -1,8 +1,8 @@
 <x-auth.layout title="Login">
     <form action={{url("/login")}} method="post" class="auth__form">
         @csrf
-        <x-auth.input :errors="$errors" name="email" type="text"/>
-        <x-auth.input :errors="$errors" name="password" type="password"/>
+        <x-auth.input :errors="$errors" name="email" type="text" autocomplete="email"/>
+        <x-auth.input :errors="$errors" name="password" type="password" autocomplete="current-password"/>
         <input type="submit" value="Login" class="auth__submit" />
     </form>
     <div class="auth__footer">
