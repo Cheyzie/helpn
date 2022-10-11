@@ -1,0 +1,31 @@
+.auth__input {
+    width: 100%;
+    padding: 10px;
+}
+
+.auth__field {
+    padding: 5px;
+    border-radius: 15px;
+    color: yellow;
+    background-color: rgba(11, 0, 170, 0.2);
+    width: 100%;
+}
+
+.auth__field::placeholder {
+    color: yellow;
+    opacity: 0.6;
+}
+
+.auth__error {
+    padding: 5px;
+    color: red;
+}
+
+.auth__field_error {
+    border-color: red;
+    color: red;
+}
+
+.auth__field_error::placeholder {
+    color: red;
+}

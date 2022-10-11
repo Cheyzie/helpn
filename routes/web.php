@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Models\Bill;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -20,33 +20,28 @@ Route::get('/', function () {
     return "Hi there";
 });
 
-Route::get('/hi/{name?}', function($name = 'World') {
-    return "Hello, $name";
-});
-
 Route::get('/bills/{bill}', function(Bill $bill){
     return $bill->makeVisible('contacts')->toJson();
 });
 
-Route::get('/signin', function(){
-    return view('signin');
-})->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+
+Route::post('/login', [LoginController::class, 'create']);
 
 Route::get('/users', function(){
     return User::all();
 });
 
-Route::post('/signin', [LoginController::class, 'authenticate']);
 
 Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function(){
     Route::get('/', function() {
-        return 'Welcom to admin panel';
+        return 'Welcome to admin panel';
     });
 
     Route::get('/users', function(){
         return User::all();
     });
-    
+
     Route::get('/bills', function(){
         $bills = Bill::with('user')->simplePaginate(10);
         return view('admin.bills')->with('bills', $bills);
