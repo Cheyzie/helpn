@@ -48,8 +48,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $atributes = [
-        'role_id' => 1,
+    protected $attributes = [
+        'role_id' => 2,
     ];
 
     public function role() {
