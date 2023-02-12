@@ -34,6 +34,12 @@ class AuthController extends Controller
         return response()->json(['token' => $token->plainTextToken]);
     }
 
+    /**
+     * User creating and login
+     *
+     * @param SignupRequest $request
+     * @return JsonResponse
+     */
     public function signUp(SignupRequest $request): JsonResponse {
         $data =  $request->validated();
 
@@ -45,9 +51,14 @@ class AuthController extends Controller
         return response()->json(['user' => $user, 'token' => $user->createToken("api")->plainTextToken]);
     }
 
-    public function signOut(Request $request) {
+    /**
+     * Revokes the current user`s token
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function signOut(Request $request):JsonResponse {
         $request->user()->currentAccessToken()->delete();
-
-        return response()->json(['message' => ' you have been successfully signed out']);
+        return response()->json(['message' => ' You have been successfully signed out']);
     }
 }
