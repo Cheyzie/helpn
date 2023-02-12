@@ -21,9 +21,6 @@ Route::get('/', function () {
     return "Hi there";
 });
 
-Route::get('/bills/{bill}', function(Bill $bill){
-    return $bill->makeVisible('contacts')->toJson();
-});
 
 Route::get('/signup', [SignupController::class, 'index']);
 
@@ -38,17 +35,4 @@ Route::get('/users', function(){
 });
 
 
-Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function(){
-    Route::get('/', function() {
-        return 'Welcome to admin panel';
-    });
 
-    Route::get('/users', function(){
-        return User::all();
-    });
-
-    Route::get('/bills', function(){
-        $bills = Bill::with('user')->simplePaginate(10);
-        return view('admin.bills')->with('bills', $bills);
-    });
-});

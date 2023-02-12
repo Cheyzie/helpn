@@ -18,7 +18,6 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->boolean('need');
             $table->foreignIdFor(Type::class);
             $table->text('title');
             $table->text('details');

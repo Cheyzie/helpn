@@ -18,7 +18,6 @@ class BillFactory extends Factory
     {
         return [
             'type_id'=> 1,
-            'need' => random_int(0, 1),
             'title' => 'Test bill',
             'details' => 'test detail',
             'contacts'=>'tg: @contact',

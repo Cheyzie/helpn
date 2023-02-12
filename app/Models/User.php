@@ -36,7 +36,8 @@ class User extends Authenticatable
     protected $hidden = [
         'role_id',
         'password',
-        'remember_token',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -48,6 +49,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Default values for attributes
+     *
+     * @var array<string, mixed>
+     */
     protected $attributes = [
         'role_id' => 2,
     ];
