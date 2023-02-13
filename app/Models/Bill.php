@@ -4,13 +4,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Bill extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'details',
+        'contacts',
+        'user_id',
+        'city_id',
+        'type_id'
+    ];
+
     protected $with = [
-        'city:id,name',
+        'user:id,name',
+        'city',
+        'type',
     ];
 
     protected $hidden = [
@@ -21,15 +38,30 @@ class Bill extends Model
         'updated_at',
     ];
 
-    public function city() {
+    /**
+     * Bill`s city
+     *
+     * @return BelongsTo
+     */
+    public function city(): BelongsTo {
         return $this->belongsTo(City::class);
     }
 
-    public function type() {
+    /**
+     * Type to which the bill belongs
+     *
+     * @return BelongsTo
+     */
+    public function type(): BelongsTo {
         return $this->belongsTo(Type::class);
     }
 
-    public function user() {
+    /**
+     * Bill`s author
+     *
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 }

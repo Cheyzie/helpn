@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BillController;
 use App\Models\User;
 
 /*
@@ -26,6 +27,10 @@ Route::prefix("v1")->group(function () {
     Route::post('/signup', [AuthController::class, 'signUp']);
     Route::post('/signout', [AuthController::class, 'signOut'])
         ->middleware('auth:sanctum');
+
+    Route::apiResource('/bills', BillController::class)
+        ->middleware('auth:sanctum');
+
     Route::get("/me", function (Request $request){
         return User::where('id', $request->user()->id)->get();
     })->middleware('auth:sanctum');
