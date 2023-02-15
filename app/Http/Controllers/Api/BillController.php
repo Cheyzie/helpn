@@ -40,7 +40,7 @@ class BillController extends Controller
         $data = $request->validated();
         $data['user_id'] = $request->user()->id;
         $bill = Bill::create($data);
-        return response()->json(['bill' => $bill]);
+        return response()->json(['bill' => $bill], 201);
     }
 
     /**
