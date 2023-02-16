@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -31,8 +32,11 @@ Route::prefix("v1")->group(function () {
     Route::apiResource('/bills', BillController::class)
         ->middleware('auth:sanctum');
 
+    Route::apiResource('/users', UserController::class)->except('create')
+        ->middleware('auth:sanctum');
+
     Route::get("/me", function (Request $request){
-        return User::where('id', $request->user()->id)->get();
+        return User::where('id', $request->user()->id)->get()->makeVisible(['role']);
     })->middleware('auth:sanctum');
 });
 
