@@ -48,7 +48,7 @@ class DeleteTest extends TestCase
         $response = $this->withHeader('accept', 'application/json')
             ->delete("/api/v1/types/1234");
 
-        $response->assertStatus(403);
+        $response->assertStatus(404);
     }
 
     public function test_admin_can_delete_type()

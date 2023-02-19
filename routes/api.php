@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,6 @@ use App\Models\User;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
 
 
 Route::prefix("v1")->group(function () {
@@ -36,6 +34,10 @@ Route::prefix("v1")->group(function () {
     Route::apiResource('/cities', CityController::class)
         ->except(['index', 'show'])->middleware('auth:sanctum');
     Route::apiResource('/cities', CityController::class)->only(['index', 'show']);
+
+    Route::apiResource('/types', TypeController::class)
+        ->except(['index', 'show'])->middleware('auth:sanctum');
+    Route::apiResource('/types', TypeController::class)->only(['index', 'show']);
 
     Route::apiResource('/users', UserController::class)->except('create')
         ->middleware('auth:sanctum');

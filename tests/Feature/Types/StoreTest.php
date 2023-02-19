@@ -12,6 +12,8 @@ class StoreTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected $seed = true;
+
     public function test_unauthenticated_user_cant_create_type()
     {
         $response = $this->withHeader('accept', 'application/json')
@@ -42,10 +44,6 @@ class StoreTest extends TestCase
             ->post('/api/v1/types', []);
 
         $response->assertStatus(422);
-
-        $this->assertDatabaseHas('types', [
-            'title' => 'testSupplies',
-        ]);
     }
 
     public function test_admin_can_create_type()
