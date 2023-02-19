@@ -19,7 +19,7 @@ class UpdateTest extends TestCase
     {
         $city = City::factory()->create(['name' => 'Boryspil']);
 
-        $response = $this->withHeader('accepts', 'application/json')
+        $response = $this->withHeader('accept', 'application/json')
             ->patch("/api/v1/cities/{$city->id}", ['name' => 'New Boryspil']);
 
         $response->assertStatus(401);
@@ -36,7 +36,7 @@ class UpdateTest extends TestCase
 
         Sanctum::actingAs(User::factory()->create(['role_id' => 2]));
 
-        $response = $this->withHeader('accepts', 'application/json')
+        $response = $this->withHeader('accept', 'application/json')
             ->patch("/api/v1/cities/{$city->id}", ['name' => 'New Boryspil']);
 
         $response->assertStatus(403);
@@ -51,7 +51,7 @@ class UpdateTest extends TestCase
     {
         Sanctum::actingAs(User::factory()->create(['role_id' => 1]));
 
-        $response = $this->withHeader('accepts', 'application/json')
+        $response = $this->withHeader('accept', 'application/json')
             ->patch("/api/v1/cities/1234", ['name' => 'New Boryspil']);
 
         $response->assertStatus(404);
@@ -63,7 +63,7 @@ class UpdateTest extends TestCase
 
         Sanctum::actingAs(User::factory()->create(['role_id' => 1]));
 
-        $response = $this->withHeader('accepts', 'application/json')
+        $response = $this->withHeader('accept', 'application/json')
             ->patch("/api/v1/cities/{$city->id}", ['name' => 'New Boryspil']);
 
         $response->assertStatus(200);

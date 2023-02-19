@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,10 @@ Route::prefix("v1")->group(function () {
 
     Route::apiResource('/bills', BillController::class)
         ->middleware('auth:sanctum');
+
+    Route::apiResource('/cities', CityController::class)
+        ->except(['index', 'show'])->middleware('auth:sanctum');
+    Route::apiResource('/cities', CityController::class)->only(['index', 'show']);
 
     Route::apiResource('/users', UserController::class)->except('create')
         ->middleware('auth:sanctum');
