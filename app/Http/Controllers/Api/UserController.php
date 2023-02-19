@@ -7,7 +7,6 @@ use App\Http\Requests\Api\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -20,24 +19,10 @@ class UserController extends Controller
      * Display a listing of the resource.
      *
      * @return JsonResponse
-     * @throws AuthorizationException
      */
     public function index(): JsonResponse
     {
-        $this->authorize('viewAny', User::class);
-
         return response()->json(['users' => User::all()->makeVisible(['role'])]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -79,7 +64,6 @@ class UserController extends Controller
      *
      * @param User $user
      * @return JsonResponse
-     * @throws \Throwable
      */
     public function destroy(User $user): JsonResponse
     {
