@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BillReportController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\UserController;
@@ -28,19 +29,22 @@ Route::prefix("v1")->group(function () {
     Route::post('/signout', [AuthController::class, 'signOut'])
         ->middleware('auth:sanctum');
 
-    Route::apiResource('/bills', BillController::class)
+    Route::apiResource('bills', BillController::class)
         ->middleware('auth:sanctum');
 
-    Route::apiResource('/cities', CityController::class)
+    Route::apiResource('cities', CityController::class)
         ->except(['index', 'show'])->middleware('auth:sanctum');
-    Route::apiResource('/cities', CityController::class)->only(['index', 'show']);
+    Route::apiResource('cities', CityController::class)->only(['index', 'show']);
 
-    Route::apiResource('/types', TypeController::class)
+    Route::apiResource('types', TypeController::class)
         ->except(['index', 'show'])->middleware('auth:sanctum');
-    Route::apiResource('/types', TypeController::class)->only(['index', 'show']);
+    Route::apiResource('types', TypeController::class)->only(['index', 'show']);
 
-    Route::apiResource('/users', UserController::class)->except('create')
+    Route::apiResource('users', UserController::class)->except('create')
         ->middleware('auth:sanctum');
+
+    Route::apiResource('bills.reports', BillReportController::class)->shallow()
+        ->except(['update'])->middleware('auth:sanctum');
 
     Route::get("/me", function (Request $request){
         return User::where('id', $request->user()->id)->get()->makeVisible(['role']);

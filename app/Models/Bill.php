@@ -64,4 +64,11 @@ class Bill extends Model
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reports() {
+        return $this->hasMany(Report::class);
+    }
 }

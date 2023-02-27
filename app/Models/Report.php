@@ -9,17 +9,17 @@ class Report extends Model
 {
     use HasFactory;
 
-    protected $with = [
-        'bill',
+    protected $with = ['user:id,name'];
+
+    protected $fillable = [
+        'details',
+        'bill_id',
+        'user_id',
     ];
 
-    protected $hidden = [
-        'user_id',
-        'bill_id',
-    ];
 
     public function bill() {
-        $this->belongsTo(Bill::class);
+        return $this->belongsTo(Bill::class);
     }
 
     public function user() {
