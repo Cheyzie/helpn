@@ -2,13 +2,12 @@
 
 use App\Http\Controllers\Api\BillReportController;
 use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BillController;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +24,17 @@ use App\Models\User;
 
 Route::prefix("v1")->group(function () {
     Route::post("/login", [AuthController::class, "login"]);
+
     Route::post('/signup', [AuthController::class, 'signUp']);
+
     Route::post('/signout', [AuthController::class, 'signOut'])
         ->middleware('auth:sanctum');
+
+    Route::prefix('profile')->middleware('auth:sanctum')->group(function () {
+        Route::get('/', [ProfileController::class, 'index']);
+        Route::patch('/', [ProfileController::class, 'update']);
+        Route::delete('/', [ProfileController::class, 'destroy']);
+    });
 
     Route::apiResource('bills', BillController::class)
         ->middleware('auth:sanctum');
@@ -45,9 +52,5 @@ Route::prefix("v1")->group(function () {
 
     Route::apiResource('bills.reports', BillReportController::class)->shallow()
         ->except(['update'])->middleware('auth:sanctum');
-
-    Route::get("/me", function (Request $request){
-        return User::where('id', $request->user()->id)->get()->makeVisible(['role']);
-    })->middleware('auth:sanctum');
 });
 
