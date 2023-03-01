@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\BillReportController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,7 @@ Route::prefix("v1")->group(function () {
         Route::get('/', [ProfileController::class, 'index']);
         Route::patch('/', [ProfileController::class, 'update']);
         Route::delete('/', [ProfileController::class, 'destroy']);
+        Route::apiResource('tokens', TokenController::class)->only(['index', 'destroy']);
     });
 
     Route::apiResource('bills', BillController::class)
